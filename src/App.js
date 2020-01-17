@@ -5,6 +5,7 @@ import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
 import axios from 'axios';
+import uuid from 'uuid';
 
 
 import './App.css';
@@ -38,7 +39,10 @@ class App extends Component {
      title: title,
      completed: false
    })
-    .then(res => this.setState({todos: [...this.state.todos, res.data]}));
+    .then(res => {
+      res.data.id = uuid.v4();  // append id to data
+      this.setState({todos: [...this.state.todos, res.data]})
+    });
   }
 
   // delete todo
